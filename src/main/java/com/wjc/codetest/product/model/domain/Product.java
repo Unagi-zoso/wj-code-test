@@ -4,6 +4,8 @@ package com.wjc.codetest.product.model.domain;
    문제:   wildcard Import 로 인한 유지보수 어려움
    원인:   어떤 패키지에서 Import 되었는지 직관적으로 파악 어려워 의존성 관리 어려움
    개선안: 컨벤션적으로 개별 Import 를 사용하게 하고 IDE 설정을 통해 wildcard Import 방지
+          [선택 근거]
+          현재 클래스가 얼마나 많은 의존성을 가지고 있는지 명확히 파악할 수 있어야 유지보수가 용이함
 */
 import jakarta.persistence.*;
 import lombok.Getter;
