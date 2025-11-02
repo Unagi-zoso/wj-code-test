@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
    문제:   wildcard Import 로 인한 유지보수 어려움
    원인:   어떤 패키지에서 Import 되었는지 직관적으로 파악 어려워 의존성 관리 어려움
    개선안: 컨벤션적으로 개별 Import 를 사용하게 하고 IDE 설정을 통해 wildcard Import 방지
+          [선택 근거]
+          현재 클래스가 얼마나 많은 의존성을 가지고 있는지 명확히 파악할 수 있어야 유지보수가 용이함
 */
 import org.springframework.web.bind.annotation.*;
 
@@ -42,14 +44,16 @@ public class ProductController {
     private final ProductService productService;
 
     /*
-       문제:   API 주소 설계 개선 필요
+       문제:   API 주소 설계 개선 필요 (유지보수 어려움)
        원인:   get 동사 사용, 자원 식별에 불필요한 by 사용, 단수형 product 사용으로
               REST API 관점에서 비효율적 설계
        개선안: get 동사 제거 후 HTTP 메서드에 역할 전담
               by 제거 후 자원 식별자를 통해 구분
               product -> products 복수형 사용
               /get/product/by/{productId} -> /products/{productId}
-              URL 만으로 자원과 행위를 명확히 알 수 있음
+              [선택 근거]
+              RESTful 하게 설계된 API 는 URL 만으로 자원과 행위를 명확히 알 수 있고
+              일관적인 설계로 유지보수에 유리하다.
      */
     @GetMapping(value = "/get/product/by/{productId}")
     public ResponseEntity<Product> getProductById(@PathVariable(name = "productId") Long productId){
