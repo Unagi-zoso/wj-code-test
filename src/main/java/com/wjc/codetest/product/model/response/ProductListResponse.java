@@ -16,9 +16,11 @@ import java.util.List;
  */
 
 /*
-  문제:   Java17 이상의 Record 타입 활용 부족
+  문제:   Java17 이상의 Record 타입 활용 부족, 불필요한 코드 작성
   원인:   Record 가 지원됨에도 Lombok 에만 의존하여 DTO 작성
   개선안: Record 타입을 활용하여 DTO 작성 고려
+         [선택 근거]
+         @Getter 같은 어노테이션을 누락할 우려가 줄어들고, DTO 의 불변성을 보장할 수 있음
 */
 @Getter
 @Setter

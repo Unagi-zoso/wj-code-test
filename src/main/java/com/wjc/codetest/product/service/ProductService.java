@@ -37,6 +37,7 @@ public class ProductService {
            문제:   ! 연산자에 의한 가독성 저하
            원인:   ! 연산자가 포함된 조건문은 직관적이지 않음
            개선안: Optional의 isEmpty() 메서드 사용하여 ! 연산자 제거
+                  코드 가독성을 향상 시킴
          */
         if (!productOptional.isPresent()) {
             throw new RuntimeException("product not found");
@@ -49,10 +50,11 @@ public class ProductService {
         product.setCategory(dto.getCategory());
         product.setName(dto.getName());
         /*
-           문제:   무의미한 변수 할당
+           문제:   무의미한 변수 할당, 성능 및 일관성 저하
            원인:   이후 큰 처리가 없고 단순히 반환함에도 변수를 할당함
                   (결과를 바로 반환하는 다른 메소드와 비교했을 때 일관성 부족의 문제도 존재)
            개선안: productRepository.save(product)의 결과를 바로 반환
+                  다른 코드와 일관성을 맞춰 가독성과 유지보수성 향상
            성능:  성능 향상 (불필요한 변수 할당 제거), Intellij Bytecode뷰 기준 바이트코드 4줄 감소
          */
         Product updatedProduct = productRepository.save(product);
